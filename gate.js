@@ -1,5 +1,48 @@
-module.exports = and
-var terminal = require('./terminal.js')
+module.exports.and = and
+module.exports.or = or
+module.exports.xor = xor
+module.exports.nand = nand
+module.exports.nor = nor
+
+
+function nor(){
+  return gate(function a(input_a, input_b, value) {
+    if (!input_a.v && !input_b.v) {
+      value.set(1)
+    } else {
+      value.set(0)
+    }
+  })
+}
+
+function not(){
+  return gate(function a(input_a, input_b, value) {
+    value.set(!input_a.v)
+  })
+}
+
+function nand(){
+  return gate(function a(input_a, input_b, value) {
+    if (input_a.v && input_b.v) {
+      value.set(0)
+    } else {
+      value.set(1)
+    }
+  })
+}
+
+function xor(){
+  return gate(function a(input_a, input_b, value) {
+    if (!input_a.v && !input_b.v) {
+      value.set(0)
+    } else if (input_a.v && input_b.v) {
+      value.set(0)
+    } else {
+      value.set(1)
+    }
+  })
+}
+
 
 function and(){
   return gate(function a(input_a, input_b, value) {
@@ -10,6 +53,19 @@ function and(){
     }
   })
 }
+
+function or(){
+  return gate(function a(input_a, input_b, value) {
+    if (input_a.v || input_b.v) {
+      value.set(1)
+    } else {
+      value.set(0)
+    }
+  })
+}
+
+
+var terminal = require('./terminal.js')
 
 function gate(fn) {
 
@@ -30,7 +86,7 @@ function gate(fn) {
   var op = fn
 
   function operate() {
-    fn(input_a, input_b, value)
+    op(input_a, input_b, value)
   }
 
   function print(msg) {

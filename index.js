@@ -1,4 +1,4 @@
-var and_gate = require('./gate.js')
+var and_gate = require('./gate.js').and
 var terminal = require('./terminal.js')
 
 var PIN_0 = terminal()
