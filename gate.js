@@ -3,7 +3,7 @@ module.exports.or = or
 module.exports.xor = xor
 module.exports.nand = nand
 module.exports.nor = nor
-
+module.exports.not = not
 
 function nor(){
   return gate(function a(input_a, input_b, value) {
@@ -80,7 +80,11 @@ function gate(fn) {
   var output = terminal()
 
   function init(terminal_a, terminal_b) {
-    connect(terminal_a.get(), terminal_b.get())
+    if(terminal_a !== undefined && terminal_b === undefined){
+      connect(terminal_a.get(), terminal())
+    } else {
+      connect(terminal_a.get(), terminal_b.get())
+    }
   }
 
   var op = fn
@@ -91,9 +95,9 @@ function gate(fn) {
 
   function print(msg) {
     if (msg) {
-      console.log(msg, '\t', 'value', value.get(), 'output', output.get())
+      console.log(msg, '\t', 'value', value.get(), 'output', output.get(), 'inA', input_a.v, 'inB', input_b.v)
     } else {
-      console.log('\t\t', 'value', value.get(), 'output', output.get())
+      console.log('\t\t', 'value', value.get(), 'output', output.get(), 'inA', input_a.v, 'inB', input_b.v)
     }
   }
 
