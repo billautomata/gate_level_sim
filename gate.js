@@ -91,6 +91,7 @@ function gate(fn) {
 
   function operate() {
     op(input_a, input_b, value)
+    write()
   }
 
   function print(msg) {
