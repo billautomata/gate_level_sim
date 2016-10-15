@@ -1,36 +1,28 @@
-var and_gate = require('./gate.js').and
-var terminal = require('./terminal.js')
+// test half adder
+var run_test = require('./test_apparatus/run_test.js')
 
-var PIN_0 = terminal()
-var PIN_1 = terminal()
+var truth_table_half_adder = [
+  { inputs: [0,0], outputs: [0,0] },
+  { inputs: [1,0], outputs: [0,1] },
+  { inputs: [0,1], outputs: [0,1] },
+  { inputs: [1,1], outputs: [1,0] },
+]
 
-var gate = and_gate()
-gate.init(PIN_0, PIN_1)
-gate.operate()
-gate.print('before write')
-gate.write()
-gate.print('after write')
+var half_adder = require('./circuits/half_adder.js')()
 
-PIN_0.set(1)
-PIN_1.set(1)
-gate.operate()
-gate.print('before write')
-gate.write()
-gate.print('after write')
+run_test(truth_table_half_adder, half_adder)
 
-PIN_0.set(0)
-gate.operate()
-gate.write()
-gate.print()
+var truth_table_full_adder = [
+  { inputs: [0,0,0], outputs: [0,0] },
+  { inputs: [0,0,1], outputs: [0,1] },
+  { inputs: [0,1,0], outputs: [0,1] },
+  { inputs: [0,1,1], outputs: [1,0] },
+  { inputs: [1,0,0], outputs: [0,1] },
+  { inputs: [1,0,1], outputs: [1,0] },
+  { inputs: [1,1,0], outputs: [1,0] },
+  { inputs: [1,1,1], outputs: [1,1] },
+]
 
-var not_gate = require('./gate.js').not()
-not_gate.init(PIN_0)
-PIN_0.set(0)
-not_gate.operate()
-not_gate.write()
-not_gate.print('not gate')
+var full_adder = require('./circuits/full_adder.js')()
 
-PIN_0.set(1)
-not_gate.operate()
-not_gate.write()
-not_gate.print('not gate')
+run_test(truth_table_full_adder, full_adder)
