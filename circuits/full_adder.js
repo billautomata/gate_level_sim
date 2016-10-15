@@ -12,8 +12,8 @@ function full_adder(){
 
   var inputs = [ A, B, Cin ]
 
-  var S = terminal()
-  var C = terminal()
+  var S = terminal('S')
+  var C = terminal('Cout')
 
   var outputs = [ C, S ]
 
@@ -41,8 +41,9 @@ function full_adder(){
   S.set(cycle1_XOR.get())
   C.set(cycle2_OR.get())
 
-  S.name('S')
-  C.name('Cout')
+  // S.name('S')
+  // C.name('Cout')
+  outputs.forEach(function(o){ console.log(o.get()) })
 
   // CYCLE
   function tick(){

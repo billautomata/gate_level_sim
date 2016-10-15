@@ -7,8 +7,8 @@ function half_adder(){
 
   var A = terminal('A')
   var B = terminal('B')
-  var S = terminal()
-  var C = terminal()
+  var S = terminal('S')
+  var C = terminal('C')
 
   var gate_AND = gate.and()
   var gate_XOR = gate.xor()
@@ -20,9 +20,6 @@ function half_adder(){
   // connect the outputs of the gates to the inputs of the terminals
   S.set(gate_XOR.get())
   C.set(gate_AND.get())
-
-  S.name('S')
-  C.name('C')
 
   // CYCLE
   function tick(){
