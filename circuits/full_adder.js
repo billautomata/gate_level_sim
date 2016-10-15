@@ -41,10 +41,6 @@ function full_adder(){
   S.set(cycle1_XOR.get())
   C.set(cycle2_OR.get())
 
-  // S.name('S')
-  // C.name('Cout')
-  outputs.forEach(function(o){ console.log(o.get()) })
-
   // CYCLE
   function tick(){
     cycles.forEach(function(gates){
